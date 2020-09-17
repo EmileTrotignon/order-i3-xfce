@@ -1,0 +1,23 @@
+opam-version: "2.0"
+version: "0.1"
+synopsis: "EML is a simple templating language that lets you generate text with plain OCaml"
+description: """
+EML is a simple templating language that lets you generate text with plain OCaml
+Inspired by EJS templates
+"""
+maintainer: "Emile Trotignon emile.trotignon@gmail.com"
+authors: "Emile Trotignon emile.trotignon@gmail.com"
+license: "MIT"
+homepage: "https://github.com/EmileTrotignon/order-xfce-i3"
+bug-reports: "https://github.com/EmileTrotignon/order-xfce-i3/issues"
+dev-repo: "git+https://github.com/EmileTrotignon/order-xfce-i3.git"
+depends: [ 
+    "ocaml" {>= "4.07.0"}
+    "dune" {>= "2.5.0"} 
+    "lwt" 
+    "i3ipc" {>= "v0.3"}
+    ]
+build: [
+  ["dune" "subst"] {pinned}
+  ["dune" "build" "-p" name "-j" jobs]
+]
