@@ -1,4 +1,3 @@
- open Printf
  
  type 'a t = (int * 'a) array
 
@@ -8,7 +7,7 @@ let from_array (tab: 'a array) (compare : 'a -> 'a -> int) : 'a t =
   Array.stable_sort (fun (_, e) (_, e') -> compare e e') sorted;
   let indexes : int array = Array.make (Array.length tab) (-1) in
   Array.iteri (fun i' (i, _) -> indexes.(i)<-i') sorted;
-  Array.mapi (fun i e -> printf "%d, " e; (e, tab.(i))) indexes
+  Array.mapi (fun i e -> (e, tab.(i))) indexes
 
 
 let ordered tab compare move_to_left =

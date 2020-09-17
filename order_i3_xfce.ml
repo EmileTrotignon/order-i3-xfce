@@ -1,8 +1,4 @@
-(* Dispatch following the message type, and send the corresponding IPC
-   message. Then simply output the reply.
-*)
 open Printf
-
 let get_group_and_title (n : I3ipc.Reply.node) =
   match n.window_properties with
   | None -> ("", "")
@@ -110,45 +106,4 @@ let main =
     | _ -> Lwt.return_unit
   done
 
-(*match !message_type with
-  | "command" ->
-    let%lwt outcomes = I3ipc.command conn payload in
-    List.iter (fun outcome ->
-      if not outcome.I3ipc.Reply.success then
-        Format.fprintf fmt "ERROR: %s\n\n%!"
-          (match outcome.I3ipc.Reply.error with Some s -> s | None -> "")
-    ) outcomes;
-    pp_list fmt (I3ipc.Reply.pp_command_outcome fmt) outcomes |> Lwt.return
-  | "get_workspaces" ->
-    let%lwt workspaces = I3ipc.get_workspaces conn in
-    pp_list fmt (I3ipc.Reply.pp_workspace fmt) workspaces |> Lwt.return
-  | "get_outputs" ->
-    let%lwt outputs = I3ipc.get_outputs conn in
-    pp_list fmt (I3ipc.Reply.pp_output fmt) outputs |> Lwt.return
-  | "get_tree" ->
-    let%lwt tree = I3ipc.get_tree conn in
-    I3ipc.Reply.pp_node fmt tree |> Lwt.return
-  | "get_marks" ->
-    let%lwt marks = I3ipc.get_marks conn in
-    pp_list fmt (Format.pp_print_string fmt) marks |> Lwt.return
-  | "get_bar_ids" ->
-    let%lwt bar_ids = I3ipc.get_bar_ids conn in
-    pp_list fmt (Format.pp_print_string fmt) bar_ids |> Lwt.return
-  | "get_bar_config" ->
-    let%lwt bar_cfg = I3ipc.get_bar_config conn payload in
-    I3ipc.Reply.pp_bar_config fmt bar_cfg |> Lwt.return
-  | "get_version" ->
-    let%lwt version = I3ipc.get_version conn in
-    I3ipc.Reply.pp_version fmt version |> Lwt.return
-  | "get_binding_modes" ->
-    let%lwt binding_modes = I3ipc.get_binding_modes conn in
-    I3ipc.Reply.pp_binding_modes fmt binding_modes |> Lwt.return
-  | "get_config" ->
-    let%lwt config = I3ipc.get_config conn in
-    I3ipc.Reply.pp_config fmt config |> Lwt.return
-  | "send_tick" ->
-    let%lwt tick = I3ipc.send_tick conn payload in
-    Format.pp_print_bool fmt tick |> Lwt.return
-  | _ -> Format.fprintf Format.err_formatter "Unsupported message type"; exit 1
-*)
 let () = Lwt_main.run main
