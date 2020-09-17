@@ -1,10 +1,7 @@
 opam-version: "2.0"
 version: "0.1"
-synopsis: "EML is a simple templating language that lets you generate text with plain OCaml"
-description: """
-EML is a simple templating language that lets you generate text with plain OCaml
-Inspired by EJS templates
-"""
+synopsis: "order-xfce-i3 is a small utility that allow you to keep a synchronized order between i3 tabs and the xfce pannel window buttons plugin."
+description: ""
 maintainer: "Emile Trotignon emile.trotignon@gmail.com"
 authors: "Emile Trotignon emile.trotignon@gmail.com"
 license: "MIT"

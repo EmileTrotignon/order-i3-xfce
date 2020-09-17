@@ -1,7 +1,7 @@
 #order-xfce-i3
 
 This is a small utility that allow you to keep a synchronized order between i3 tabs and the xfce pannel window buttons plugin.
-In order to do so, you will need to have your xfce pannel window buttons sording order setting set to "Group title and window title", 
+In order to do so, you will need to have your xfce pannel window buttons sorting order setting set to "Group title and window title", 
 and then you can run the order_xfce_i3 executable.
 While it is running, every time you do an action that may change the order of the tabs (create a new window for instance) it will reorder the i3 tabs to be sorted 
 lexicographically according to group name and then window name.
