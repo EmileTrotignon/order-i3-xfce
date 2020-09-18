@@ -5,7 +5,7 @@ In order to do so, you will need to have your xfce pannel window buttons sorting
 and then you can run the order_xfce_i3 executable.
 While it is running, every time you do an action that may change the order of the tabs (create a new window for instance) it will reorder the i3 tabs to be sorted 
 lexicographically according to group name and then window name.
-The order may not be synchronised if there are multiple windows with same group and window name. 
+The order may not be synchronised if there are multiple windows with same group and window name, however, as soon as this situation changes, it will resynchronize. 
 A common case is multiple terminals with the same current directory.
 
 It is written in OCaml using ocaml-i3ipc.

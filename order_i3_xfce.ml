@@ -69,7 +69,7 @@ let move_window_left conn con_id =
   let%lwt _ = I3ipc.command conn "move left" in
   Lwt.return_unit
 
-let order_tab conn _ =
+let order_tabs conn =
   let%lwt tree = I3ipc.get_tree conn in
   let rec iterator (node : I3ipc.Reply.node) =
     if node.layout = I3ipc.Reply.Tabbed then
@@ -80,6 +80,7 @@ let order_tab conn _ =
         if compare_lex group1 group2 = 0 then compare_lex name1 name2
         else compare_lex group1 group2
       in
+      (* Array.iter (fun e -> let g, t = get_group_and_title e in printf "%s %s\n" g t) tab ;*)
       Order.ordered tab compare (fun (n : I3ipc.Reply.node) ->
           let g, t = get_group_and_title n in
           printf "moving %s %s\n" g t;
@@ -88,20 +89,23 @@ let order_tab conn _ =
   in
   Lwt_list.iter_s iterator tree.nodes
 
+let do_ordering conn =
+  let%lwt tree = I3ipc.get_tree conn in
+  let curr_node = get_focused_window tree in
+  order_tabs conn;%lwt
+  let%lwt _ = focus_win conn curr_node.id in
+            Lwt.return_unit
+
 let main =
-  let format = Format.err_formatter in
   let%lwt conn = I3ipc.connect () in
   let%lwt _ = I3ipc.subscribe conn [ I3ipc.Window ] in
+  do_ordering conn ;%lwt
   while%lwt true do
     match%lwt I3ipc.next_event conn with
     | Window info -> (
         match info.change with
         | New | Title | FullscreenMode | Move ->
-            let%lwt tree = I3ipc.get_tree conn in
-            let curr_node = get_focused_window tree in
-            order_tab conn format;%lwt
-            let%lwt _ = focus_win conn curr_node.id in
-            Lwt.return_unit
+            do_ordering conn
         | _ -> Lwt.return_unit )
     | _ -> Lwt.return_unit
   done
