@@ -1,6 +1,6 @@
 opam-version: "2.0"
 version: "0.1"
-synopsis: "order-i3-xfce is a small utility that allow you to keep a synchronized order between i3 tabs and the xfce pannel window buttons plugin."
+synopsis: "Order-i3-xfce is a small utility that allow you to keep a synchronized order between i3 tabs and the xfce pannel window buttons plugin."
 description: ""
 maintainer: "Emile Trotignon emile.trotignon@gmail.com"
 authors: "Emile Trotignon emile.trotignon@gmail.com"
